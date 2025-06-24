@@ -1,0 +1,23 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /identity
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017
+      database: user_db
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+    org.springframework.web: INFO
+    com.chien: DEBUG
+
+jwt:
+  signerKey: "1TjXchw5FloESb63Kc+DFhTARvpWL4jUGCwfGWxuG5SIf/1y/LgJxHnMqaF6A/ij"
+
+app:
+  services:
+    profile: http://localhost:8081/profile

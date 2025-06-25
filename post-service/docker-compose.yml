@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  post-service:
+    build: .
+    ports:
+      - "8082:8082"
+    environment:
+      - DEBUG=True
+      - DB_HOST=postgres
+      - DB_NAME=post_service
+      - DB_USER=postgres
+      - DB_PASSWORD=password
+      - DB_PORT=5432
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+    depends_on:
+      - postgres
+      - redis
+    volumes:
+      - ./media:/app/media
+    command: python manage.py runserver 0.0.0.0:8082
+
+  postgres:
+    image: postgres:15
+    environment:
+      - POSTGRES_DB=post_service
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+  celery:
+    build: .
+    environment:
+      - DEBUG=True
+      - DB_HOST=postgres
+      - DB_NAME=post_service
+      - DB_USER=postgres
+      - DB_PASSWORD=password
+      - DB_PORT=5432
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+    depends_on:
+      - postgres
+      - redis
+    command: celery -A post_service worker --loglevel=info
+
+volumes:
+  postgres_data:
+  redis_data: 

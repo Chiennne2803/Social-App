@@ -6,5 +6,4 @@ import org.springframework.stereotype.Repository;
 import com.chien.profile.entity.UserProfile;
 
 @Repository
-public interface UserProfileRepository extends MongoRepository<UserProfile, String> {
-}
+public interface UserProfileRepository extends MongoRepository<UserProfile, String> {}

@@ -1,10 +1,10 @@
 package com.chien.profile.dto.response;
 
-import lombok.*;
-import lombok.experimental.FieldDefaults;
-
 import java.util.Date;
 import java.util.List;
+
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 @Data
 @Builder
@@ -13,11 +13,14 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserProfileResponse {
     String id;
+    String userId;
     String gender;
     String description;
     Date createdAt;
     Date updatedAt;
-
+    Date dob;
+    String imgAvatar;
+    String imgCover;
     List<Visitor> visitors;
     List<Friend> friends;
 

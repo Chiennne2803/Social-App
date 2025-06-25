@@ -1,12 +1,13 @@
 package com.chien.profile.entity;
 
-import lombok.*;
-import lombok.experimental.FieldDefaults;
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Date;
-import java.util.List;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 @Getter
 @Setter
@@ -19,10 +20,13 @@ public class UserProfile {
 
     @Id
     String id;
+
     String userId;
     String gender;
     String description;
-
+    Date dob;
+    String imgAvatar;
+    String imgCover;
     List<Visitor> visitors;
     List<Friend> friends;
 

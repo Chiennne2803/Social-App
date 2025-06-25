@@ -1,4 +1,4 @@
-package com.chien.gateway;
+package com.devteria.gateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

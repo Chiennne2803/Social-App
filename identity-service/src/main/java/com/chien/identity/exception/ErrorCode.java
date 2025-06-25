@@ -8,6 +8,7 @@ import lombok.Getter;
 @Getter
 public enum ErrorCode {
     UNCATEGORIZED_EXCEPTION(9999, "Uncategorized error", HttpStatus.INTERNAL_SERVER_ERROR),
+    INVALID_EMAIL(1012,"Invalid email",HttpStatus.BAD_REQUEST),
     INVALID_KEY(1001, "Uncategorized error", HttpStatus.BAD_REQUEST),
     EMAIL_EXISTED(1002, "Email existed", HttpStatus.BAD_REQUEST),
     EMAIL_NOT_EXISTED(1012, "Email not existed", HttpStatus.NOT_FOUND),

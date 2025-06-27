@@ -45,7 +45,7 @@ public class UserControllerTest {
         dob = LocalDate.of(1990, 1, 1);
 
         request = UserCreationRequest.builder()
-                .username("john")
+                .email("john@gmail.com")
                 .password("12345678")
                 .build();
 
@@ -76,7 +76,7 @@ public class UserControllerTest {
     //
     void createUser_usernameInvalid_fail() throws Exception {
         // GIVEN
-        request.setUsername("joh");
+        request.setEmail("john1@gmail.com");
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
         String content = objectMapper.writeValueAsString(request);

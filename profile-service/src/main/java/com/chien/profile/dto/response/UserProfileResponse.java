@@ -16,6 +16,7 @@ public class UserProfileResponse {
     String userId;
     String gender;
     String description;
+    String username;
     Date createdAt;
     Date updatedAt;
     Date dob;

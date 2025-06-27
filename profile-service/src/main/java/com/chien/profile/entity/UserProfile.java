@@ -21,10 +21,13 @@ public class UserProfile {
 
     @Id
     String id;
+
     @Indexed(unique = true)
     String userId;
+
     String gender;
     String description;
+    String username;
     Date dob;
     String imgAvatar;
     String imgCover;

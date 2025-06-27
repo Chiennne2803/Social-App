@@ -131,8 +131,8 @@ public class AuthenticationService {
                 .toEpochMilli());
 
         JWTClaimsSet jwtClaimsSet = new JWTClaimsSet.Builder()
-                .subject(user.getEmail()) // Sửa từ username sang email
-                .issuer("devteria.com")
+                .subject(user.getEmail())
+                .issuer("chien.com")
                 .issueTime(issueTime)
                 .expirationTime(expiryTime)
                 .jwtID(UUID.randomUUID().toString())

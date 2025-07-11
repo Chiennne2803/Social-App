@@ -2,6 +2,8 @@ package com.chien.identity.dto.request;
 
 import java.util.Set;
 
+import com.chien.identity.dto.response.PermissionResponse;
+
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -13,5 +15,5 @@ import lombok.experimental.FieldDefaults;
 public class RoleRequest {
     String name;
     String description;
-    Set<String> permissions;
+    Set<PermissionResponse> permissions;
 }

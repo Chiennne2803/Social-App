@@ -2,7 +2,6 @@ package com.chien.identity.configuration;
 
 import java.text.ParseException;
 
-import com.nimbusds.jwt.SignedJWT;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
@@ -11,6 +10,7 @@ import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.stereotype.Component;
 
 import com.chien.identity.service.AuthenticationService;
+import com.nimbusds.jwt.SignedJWT;
 
 @Component
 public class CustomJwtDecoder implements JwtDecoder {
@@ -19,20 +19,19 @@ public class CustomJwtDecoder implements JwtDecoder {
 
     private final NimbusJwtDecoder nimbusJwtDecoder = null;
 
-    public CustomJwtDecoder(AuthenticationService authenticationService) {
-    }
+    public CustomJwtDecoder(AuthenticationService authenticationService) {}
 
     @Override
     public Jwt decode(String token) throws JwtException {
         try {
             SignedJWT signedJWT = SignedJWT.parse(token);
 
-            return new Jwt(token,
+            return new Jwt(
+                    token,
                     signedJWT.getJWTClaimsSet().getIssueTime().toInstant(),
                     signedJWT.getJWTClaimsSet().getExpirationTime().toInstant(),
                     signedJWT.getHeader().toJSONObject(),
-                    signedJWT.getJWTClaimsSet().getClaims()
-            );
+                    signedJWT.getJWTClaimsSet().getClaims());
         } catch (ParseException e) {
             throw new JwtException("Invalid token");
         }

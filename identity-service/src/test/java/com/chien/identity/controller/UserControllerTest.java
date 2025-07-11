@@ -49,8 +49,10 @@ public class UserControllerTest {
                 .password("12345678")
                 .build();
 
-        userResponse =
-                UserResponse.builder().id("cf0600f538b3").username("john").build();
+        userResponse = UserResponse.builder()
+                .id("cf0600f538b3")
+                .email("ndc7571@gmail.com")
+                .build();
     }
 
     @Test

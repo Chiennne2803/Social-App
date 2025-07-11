@@ -32,10 +32,9 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PACKAGE, makeFinal = true)
 public class AuthenticationFilter implements GlobalFilter, Ordered {
     IdentityService identityService;
-    @NonFinal
-    ObjectMapper objectMapper;
+    final ObjectMapper objectMapper;
 
-    String[] publicEndpoints = {"/identity/auth/.*","/identity/users/registration"};
+    String[] publicEndpoints = {"/identity/auth/.*","/identity/users/registration","identity/permissions"};
     @Value("${app.api-prefix}")
     @NonFinal
     private String apiPrefix;

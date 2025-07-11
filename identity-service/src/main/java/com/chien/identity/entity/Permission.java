@@ -11,7 +11,8 @@ import lombok.Data;
 @Builder
 public class Permission {
     @Id
-    private String name;
+    private String id;
 
+    private String name;
     private String description;
 }

@@ -16,8 +16,10 @@ import com.chien.identity.entity.User;
 
 @Mapper(componentModel = "spring")
 public interface UserMapper {
+
     User toUser(UserCreationRequest request);
 
+    @Mapping(source = "roles", target = "roles")
     UserResponse toUserResponse(User user);
 
     @Mapping(target = "roles", ignore = true)
@@ -25,6 +27,12 @@ public interface UserMapper {
 
     default Set<RoleResponse> map(List<String> roles) {
         if (roles == null) return null;
-        return roles.stream().map(RoleResponse::new).collect(Collectors.toSet());
+        return roles.stream()
+                .map(role -> RoleResponse.builder()
+                        .name(role)
+                        .description(null)
+                        .permissions(null)
+                        .build())
+                .collect(Collectors.toSet());
     }
 }

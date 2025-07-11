@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import com.chien.identity.dto.request.RoleRequest;
 import com.chien.identity.dto.response.RoleResponse;
-import com.chien.identity.entity.Permission;
 import com.chien.identity.exception.AppException;
 import com.chien.identity.exception.ErrorCode;
 import com.chien.identity.mapper.RoleMapper;
@@ -33,20 +32,11 @@ public class RoleService {
         }
 
         var role = roleMapper.toRole(request);
-
-        var permissionIds = request.getPermissions();
-        if (permissionIds == null || permissionIds.isEmpty()) {
-            throw new AppException(ErrorCode.PERMISSION_NOT_FOUND);
-        }
-
-        var permissions = permissionRepository.findAllById(permissionIds);
-        if (permissions.size() != permissionIds.size()) {
-            throw new AppException(ErrorCode.PERMISSION_NOT_FOUND);
-        }
-
-        role.setPermissions(permissions.stream().map(Permission::getName).toList());
         role = roleRepository.save(role);
-        return roleMapper.toRoleResponse(role);
+
+        var savedRole =
+                roleRepository.findById(role.getName()).orElseThrow(() -> new AppException(ErrorCode.ROLE_NOTFOUND));
+        return roleMapper.toRoleResponse(savedRole);
     }
 
     public List<RoleResponse> getAll() {

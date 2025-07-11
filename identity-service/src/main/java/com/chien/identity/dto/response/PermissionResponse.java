@@ -5,12 +5,14 @@ import lombok.experimental.FieldDefaults;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class PermissionResponse {
-    String name;
-    String description;
+    private String id;
+    private String name;
 
-    public PermissionResponse(String s) {}
+    public PermissionResponse(String id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 }

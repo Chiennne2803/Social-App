@@ -46,9 +46,10 @@ public class UserServiceTest {
                 .password("12345678")
                 .build();
 
-        userResponse =
-                UserResponse.builder().id("cf0600f538b3").username("john").build();
-
+        userResponse = UserResponse.builder()
+                .id("cf0600f538b3")
+                .email("ndc7571@gmail.com")
+                .build();
         user = User.builder()
                 .id("cf0600f538b3")
                 .email("john@gmail.com")
@@ -67,7 +68,7 @@ public class UserServiceTest {
         // THEN
 
         Assertions.assertThat(response.getId()).isEqualTo("cf0600f538b3");
-        Assertions.assertThat(response.getUsername()).isEqualTo("john");
+        Assertions.assertThat(response.getEmail()).isEqualTo("ndc7571@gmail.com");
     }
 
     @Test
@@ -89,7 +90,7 @@ public class UserServiceTest {
 
         var response = userService.getMyInfo();
 
-        Assertions.assertThat(response.getUsername()).isEqualTo("john");
+        Assertions.assertThat(response.getEmail()).isEqualTo("ndc7571@gmail.com");
         Assertions.assertThat(response.getId()).isEqualTo("cf0600f538b3");
     }
 

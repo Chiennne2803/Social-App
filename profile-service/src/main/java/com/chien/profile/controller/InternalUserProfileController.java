@@ -1,5 +1,7 @@
 package com.chien.profile.controller;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
 import com.chien.profile.dto.request.ProfileCreationRequest;
@@ -17,7 +19,9 @@ public class InternalUserProfileController {
     UserProfileService userProfileService;
 
     @PostMapping("/internal/users")
-    UserProfileResponse createProfile(@RequestBody ProfileCreationRequest request) {
-        return userProfileService.createProfile(request);
+    public UserProfileResponse createProfile(@AuthenticationPrincipal Jwt jwt,
+                                             @RequestBody ProfileCreationRequest request) {
+        String userId = jwt.getClaimAsString("userId");
+        return userProfileService.createProfile(userId, request);
     }
 }

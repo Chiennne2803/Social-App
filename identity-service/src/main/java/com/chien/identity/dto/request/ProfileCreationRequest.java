@@ -12,9 +12,19 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ProfileCreationRequest {
     String userId;
-    private String gender;
-    private String description;
-    private Date dob;
-    private String imgAvatar;
-    private String imgCover;
+
+    @NotBlank(message = "Gender is required")
+    String gender;
+
+    @Size(max = 255, message = "Description must be at most 255 characters")
+    String description;
+
+    @Past(message = "Date of birth must be in the past")
+    Date dob;
+
+    @URL(message = "Avatar image must be a valid URL")
+    String imgAvatar;
+
+    @URL(message = "Cover image must be a valid URL")
+    String imgCover;
 }
